@@ -1,0 +1,14 @@
+def queueRequests(target, wordlists):
+    engine = RequestEngine(endpoint=target.endpoint,
+                           concurrentConnections=20,
+                           requestsPerConnection=1,
+                           pipeline=False
+                           )
+
+    for word in open('~/wordlists/passlist.txt'):
+        engine.queue(target.req, word.rstrip())
+
+
+def handleResponse(req, interesting):
+    # currently available attributes are req.status, req.wordcount, req.length and req.response
+        table.add(req)
